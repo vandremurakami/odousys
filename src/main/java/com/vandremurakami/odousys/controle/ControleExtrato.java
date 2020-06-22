@@ -5,7 +5,7 @@
  */
 package com.vandremurakami.odousys.controle;
 
-import com.vandremurakami.odousys.dao.DentistaDAO;
+import com.vandremurakami.odousys.dao.PacienteDAO;
 import com.vandremurakami.odousys.dao.OrcamentoDAO;
 import com.vandremurakami.odousys.dao.PagamentoDAO;
 import com.vandremurakami.odousys.gui.dialogCadastro;
@@ -20,7 +20,7 @@ import java.util.Iterator;
 import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import com.vandremurakami.odousys.modelo.Dentista;
+import com.vandremurakami.odousys.modelo.Paciente;
 import com.vandremurakami.odousys.modelo.Orcamento;
 import com.vandremurakami.odousys.modelo.Pagamento;
 import java.awt.print.PageFormat;
@@ -43,19 +43,19 @@ public class ControleExtrato {
 
     final private OrcamentoDAO orcamentoDAO = new OrcamentoDAO();
     final private PagamentoDAO pagamentoDAO = new PagamentoDAO();
-    final private DentistaDAO dentistaDAO = new DentistaDAO();
+    final private PacienteDAO pacienteDAO = new PacienteDAO();
     private List<Orcamento> listaOrcamento;
     private List<Pagamento> listaPagamento;
     private List<Orcamento> listaFiltradaOrcamento;
     private List<Pagamento> listaFiltradaPagamento;
-    private List<Dentista> listaDentista;
+    private List<Paciente> listaPaciente;
     private List<Object> listaExtrato;
 
     final private panelExtrato panelExtrato;
 
     public ControleExtrato(panelExtrato panel) {
         this.panelExtrato = panel;
-        PreencheComboboxDentista();
+        PreencheComboboxPaciente();
         carregaListaBD();
     }
     
@@ -97,26 +97,26 @@ public class ControleExtrato {
 
     public void PreencheTabelaExtrato() {
 
-        int linhaSelecionada = panelExtrato.getComboBoxDentista().getSelectedIndex();
+        int linhaSelecionada = panelExtrato.getComboBoxPaciente().getSelectedIndex();
         if (linhaSelecionada == 0) {
             
             DefaultTableModel tabela = (DefaultTableModel) panelExtrato.getTabelaExtrato().getModel();
             tabela.setRowCount(0);
             
         } else if (linhaSelecionada > 0) {
-            Dentista dentista = listaDentista.get(linhaSelecionada-1);
+            Paciente paciente = listaPaciente.get(linhaSelecionada-1);
             
             
             listaFiltradaPagamento = new ArrayList<>();
                 listaFiltradaPagamento.addAll(listaPagamento.parallelStream()
-                        .filter(object -> (object.getDentista().getCodigo() == dentista.getCodigo()))
+                        .filter(object -> (object.getPaciente().getCodigo() == paciente.getCodigo()))
                         .collect(Collectors.toList()));
             //filtra objetos duplicados que caem em mais de um filtro
             listaFiltradaPagamento = listaFiltradaPagamento.stream().distinct().collect(Collectors.toList());
             
             listaFiltradaOrcamento = new ArrayList<>();
                 listaFiltradaOrcamento.addAll(listaOrcamento.parallelStream()
-                        .filter(object -> (object.getDentista().getCodigo() == dentista.getCodigo()))
+                        .filter(object -> (object.getPaciente().getCodigo() == paciente.getCodigo()))
                         .collect(Collectors.toList()));
             //filtra objetos duplicados que caem em mais de um filtro
             listaFiltradaOrcamento = listaFiltradaOrcamento.stream().distinct().collect(Collectors.toList());
@@ -200,11 +200,11 @@ public class ControleExtrato {
 
     }
 
-    private void PreencheComboboxDentista() {
-        listaDentista = dentistaDAO.BuscarDentistas();
-        for (int i = 0; i < listaDentista.size(); i++) {
-            Dentista o = listaDentista.get(i);
-            panelExtrato.getComboBoxDentista().addItem(o.getNome());
+    private void PreencheComboboxPaciente() {
+        listaPaciente = pacienteDAO.BuscarPacientes();
+        for (int i = 0; i < listaPaciente.size(); i++) {
+            Paciente o = listaPaciente.get(i);
+            panelExtrato.getComboBoxPaciente().addItem(o.getNome());
         }
     }
 
@@ -213,7 +213,7 @@ public class ControleExtrato {
     }
 
     public void ImprimirExtrato() {
-        int linhaSelecionada = panelExtrato.getComboBoxDentista().getSelectedIndex();
+        int linhaSelecionada = panelExtrato.getComboBoxPaciente().getSelectedIndex();
         if (linhaSelecionada > 0) {
             PrinterJob printer = PrinterJob.getPrinterJob();
             PageFormat formatoPagina = printer.defaultPage();
@@ -223,7 +223,7 @@ public class ControleExtrato {
             formatoPagina.setPaper(papel);
             printer.setPrintable(panelExtrato.getTabelaExtrato()
                     .getPrintable(JTable.PrintMode.FIT_WIDTH, 
-                            new MessageFormat(panelExtrato.getComboBoxDentista().getSelectedItem().toString()), 
+                            new MessageFormat(panelExtrato.getComboBoxPaciente().getSelectedItem().toString()), 
                             new MessageFormat("Página - {0}")),
                     formatoPagina);
             HashPrintRequestAttributeSet printParams = new HashPrintRequestAttributeSet();
@@ -238,7 +238,7 @@ public class ControleExtrato {
                 }
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Selecione um Dentista.");
+            JOptionPane.showMessageDialog(null, "Selecione um Paciente.");
         }
     }
 

@@ -13,6 +13,7 @@ import com.vandremurakami.odousys.gui.panelExtrato;
 import com.vandremurakami.odousys.gui.panelFaturamentoMensal;
 import com.vandremurakami.odousys.gui.panelListarAgenda;
 import com.vandremurakami.odousys.gui.panelListarDentista;
+import com.vandremurakami.odousys.gui.panelListarPaciente;
 import com.vandremurakami.odousys.gui.panelListarOrcamento;
 import com.vandremurakami.odousys.gui.panelListarPagamento;
 import com.vandremurakami.odousys.gui.panelHome;
@@ -39,6 +40,14 @@ public class ControlePrincipal {
     
     public void mostraDentista() {
         framePrincipal.setPanelBody(new panelListarDentista(), "Dentistas");
+    }
+    
+    public void mostraPaciente() {
+        framePrincipal.setPanelBody(new panelListarPaciente(), "Pacientes");
+    }
+    
+    public void mostraUsuario() {
+//        framePrincipal.setPanelBody(new panelListarUsuario(), "Usuários");
     }
     
     public void mostraPreco() {

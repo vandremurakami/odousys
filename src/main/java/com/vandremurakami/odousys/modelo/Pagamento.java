@@ -39,8 +39,8 @@ public class Pagamento implements java.io.Serializable {
     private LocalDate data;
     
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "cod_dentista", nullable = false)
-    private Dentista dentista;
+    @JoinColumn(name = "cod_paciente", nullable = false)
+    private Paciente paciente;
     
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "cod_tipo_pagamento", nullable = false)
@@ -83,12 +83,12 @@ public class Pagamento implements java.io.Serializable {
         this.data = data;
     }
     
-    public Dentista getDentista() {
-        return this.dentista;
+    public Paciente getPaciente() {
+        return this.paciente;
     }
 
-    public void setDentista(Dentista dentista) {
-        this.dentista = dentista;
+    public void setPaciente(Paciente pac) {
+        this.paciente = pac;
     }
     
     public TipoPagamento getTipoPagamento() {

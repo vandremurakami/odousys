@@ -5,7 +5,7 @@
  */
 package com.vandremurakami.odousys.controle;
 
-import com.vandremurakami.odousys.dao.DentistaDAO;
+import com.vandremurakami.odousys.dao.PacienteDAO;
 import com.vandremurakami.odousys.dao.PagamentoDAO;
 import com.vandremurakami.odousys.dao.StatusDAO;
 import com.vandremurakami.odousys.gui.caixaSenha;
@@ -14,14 +14,13 @@ import com.vandremurakami.odousys.gui.panelListarPagamento;
 import com.vandremurakami.odousys.gui.panelCadastroPagamento;
 import java.awt.Color;
 import java.awt.Component;
-import java.math.BigDecimal;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import com.vandremurakami.odousys.modelo.Dentista;
+import com.vandremurakami.odousys.modelo.Paciente;
 import com.vandremurakami.odousys.modelo.Pagamento;
 import com.vandremurakami.odousys.modelo.Status;
 import java.util.ArrayList;
@@ -38,9 +37,9 @@ public class ControleListaPagamento {
     
     private final StatusDAO statusDAO = new StatusDAO();
     private final PagamentoDAO pagamentoDAO = new PagamentoDAO();
-    private final DentistaDAO dentistaDAO = new DentistaDAO();
+    private final PacienteDAO pacienteDAO = new PacienteDAO();
     private List<Pagamento> listaPagamento;
-    private List<Dentista> listaDentista;
+    private List<Paciente> listaPaciente;
     private List<Pagamento> listaFiltradaPagamento;
     
     private final int NUM_COLUNA_STATUS = 6;
@@ -52,7 +51,7 @@ public class ControleListaPagamento {
     }
     
     private void inicializaPanelListaPagamento() {
-        PreencheComboboxDentista();
+        PreencheComboboxPaciente();
         carregaListaBD();
         PreencheTabelaPagamento();
         configuraCoresStatusTabelaPagamento();
@@ -64,17 +63,17 @@ public class ControleListaPagamento {
     
     public void PreencheTabelaPagamento() {
         
-        int linhaSelecionada = painelListaPagamento.getComboBoxDentista().getSelectedIndex();
+        int linhaSelecionada = painelListaPagamento.getComboBoxPaciente().getSelectedIndex();
         if (linhaSelecionada == 0) {            
             listaFiltradaPagamento = listaPagamento;
             
         } else if (linhaSelecionada > 0) {
         
-            Dentista dentista = listaDentista.get(linhaSelecionada-1);
+            Paciente paciente = listaPaciente.get(linhaSelecionada-1);
             
             listaFiltradaPagamento = new ArrayList<>();
                 listaFiltradaPagamento.addAll(listaPagamento.parallelStream()
-                        .filter(object -> (object.getDentista().getCodigo() == dentista.getCodigo()))
+                        .filter(object -> (object.getPaciente().getCodigo() == paciente.getCodigo()))
                         .collect(Collectors.toList()));
             //filtra objetos duplicados que caem em mais de um filtro
             listaFiltradaPagamento = listaFiltradaPagamento.stream().distinct().collect(Collectors.toList());
@@ -93,7 +92,7 @@ public class ControleListaPagamento {
             
             Object[] dados = {p.getCodigo(),
                 p.getData().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT)), dataPagamento,
-                p.getDentista().getNome(), p.getTipoPagamento().getNome(), p.getValor(),
+                p.getPaciente().getNome(), p.getTipoPagamento().getNome(), p.getValor(),
                 p.getStatus().getNome(), false};
             tabela.addRow(dados);
 
@@ -106,9 +105,9 @@ public class ControleListaPagamento {
         dialogCadastro dialogPagamento = new dialogCadastro(ControlePrincipal.framePrincipal, true);
         panelCadastroPagamento cadastroPagamento = new panelCadastroPagamento(dialogPagamento, null);
         
-        int posicao = painelListaPagamento.getComboBoxDentista().getSelectedIndex()-1;
+        int posicao = painelListaPagamento.getComboBoxPaciente().getSelectedIndex()-1;
         if(posicao >= 0)
-             cadastroPagamento.setNomeDentista(listaDentista.get(posicao).getNome());
+             cadastroPagamento.setNomePaciente(listaPaciente.get(posicao).getNome());
         
         dialogPagamento.setWindowName("Cadastro de Pagamento");
         dialogPagamento.setPanel(cadastroPagamento);
@@ -138,10 +137,10 @@ public class ControleListaPagamento {
         }
     }
 
-    private void PreencheComboboxDentista() {
-        listaDentista = dentistaDAO.BuscarDentistas();
-        for(int i = 0; i < listaDentista.size(); i++) {
-            painelListaPagamento.getComboBoxDentista().addItem(listaDentista.get(i).getNome());
+    private void PreencheComboboxPaciente() {
+        listaPaciente = pacienteDAO.BuscarPacientes();
+        for(int i = 0; i < listaPaciente.size(); i++) {
+            painelListaPagamento.getComboBoxPaciente().addItem(listaPaciente.get(i).getNome());
         } 
     }
 

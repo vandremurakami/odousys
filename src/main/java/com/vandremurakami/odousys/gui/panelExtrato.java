@@ -40,8 +40,8 @@ public class panelExtrato extends javax.swing.JPanel implements Printable {
         return tableExtrato; 
     }
     
-    public JComboBox getComboBoxDentista() {
-        return comboBoxDentista; 
+    public JComboBox getComboBoxPaciente() {
+        return comboBoxPaciente; 
     }
 
     @Override
@@ -70,17 +70,17 @@ public class panelExtrato extends javax.swing.JPanel implements Printable {
 
         scrollPaneExtrato = new javax.swing.JScrollPane();
         tableExtrato = new javax.swing.JTable();
-        comboBoxDentista = new javax.swing.JComboBox<>();
-        labelFiltroDentista = new javax.swing.JLabel();
+        comboBoxPaciente = new javax.swing.JComboBox<>();
+        labelFiltroPaciente = new javax.swing.JLabel();
         labelImprimir = new javax.swing.JLabel();
         labelAbrir = new javax.swing.JLabel();
         labelFechar1 = new javax.swing.JLabel();
         labelLimpar = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(254, 254, 254));
-        setMaximumSize(new java.awt.Dimension(1270, 650));
-        setMinimumSize(new java.awt.Dimension(1270, 650));
-        setPreferredSize(new java.awt.Dimension(1270, 650));
+        setMaximumSize(new java.awt.Dimension(1260, 630));
+        setMinimumSize(new java.awt.Dimension(1260, 630));
+        setPreferredSize(new java.awt.Dimension(1260, 630));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         scrollPaneExtrato.setOpaque(false);
@@ -124,18 +124,18 @@ public class panelExtrato extends javax.swing.JPanel implements Printable {
 
         add(scrollPaneExtrato, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 100, 710, 410));
 
-        comboBoxDentista.setEditable(true);
-        comboBoxDentista.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Selecione uma das opções>" }));
-        AutoCompleteDecorator.decorate(comboBoxDentista);
-        comboBoxDentista.addActionListener(new java.awt.event.ActionListener() {
+        comboBoxPaciente.setEditable(true);
+        comboBoxPaciente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Selecione uma das opções>" }));
+        AutoCompleteDecorator.decorate(comboBoxPaciente);
+        comboBoxPaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboBoxDentistaActionPerformed(evt);
+                comboBoxPacienteActionPerformed(evt);
             }
         });
-        add(comboBoxDentista, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 35, 250, 25));
+        add(comboBoxPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 35, 250, 25));
 
-        labelFiltroDentista.setText("Filtrar por Dentista:");
-        add(labelFiltroDentista, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 40, -1, -1));
+        labelFiltroPaciente.setText("Filtrar por Paciente:");
+        add(labelFiltroPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 40, -1, -1));
 
         labelImprimir.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelImprimir.setText("Imprimir");
@@ -148,7 +148,7 @@ public class panelExtrato extends javax.swing.JPanel implements Printable {
                 labelImprimirMouseClicked(evt);
             }
         });
-        add(labelImprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 600, -1, -1));
+        add(labelImprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 570, -1, -1));
 
         labelAbrir.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelAbrir.setText("Abrir");
@@ -161,7 +161,7 @@ public class panelExtrato extends javax.swing.JPanel implements Printable {
                 labelAbrirMouseClicked(evt);
             }
         });
-        add(labelAbrir, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 600, -1, -1));
+        add(labelAbrir, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 570, -1, -1));
 
         labelFechar1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelFechar1.setText("Fechar");
@@ -174,7 +174,7 @@ public class panelExtrato extends javax.swing.JPanel implements Printable {
                 labelFechar1MouseClicked(evt);
             }
         });
-        add(labelFechar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 600, -1, -1));
+        add(labelFechar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 570, -1, -1));
 
         labelLimpar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelLimpar.setText("Limpar");
@@ -190,10 +190,10 @@ public class panelExtrato extends javax.swing.JPanel implements Printable {
         add(labelLimpar, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 30, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void comboBoxDentistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxDentistaActionPerformed
+    private void comboBoxPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxPacienteActionPerformed
         if(controleExtrato != null)
             controleExtrato.PreencheTabelaExtrato();
-    }//GEN-LAST:event_comboBoxDentistaActionPerformed
+    }//GEN-LAST:event_comboBoxPacienteActionPerformed
 
     private void tableExtratoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableExtratoMouseClicked
         if (evt.getClickCount() == 2) {
@@ -218,16 +218,16 @@ public class panelExtrato extends javax.swing.JPanel implements Printable {
     }//GEN-LAST:event_labelFechar1MouseClicked
 
     private void labelLimparMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelLimparMouseClicked
-        comboBoxDentista.setSelectedIndex(0);
+        comboBoxPaciente.setSelectedIndex(0);
         ((DefaultTableModel)getTabelaExtrato().getModel()).setRowCount(0);
     }//GEN-LAST:event_labelLimparMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> comboBoxDentista;
+    private javax.swing.JComboBox<String> comboBoxPaciente;
     private javax.swing.JLabel labelAbrir;
     private javax.swing.JLabel labelFechar1;
-    private javax.swing.JLabel labelFiltroDentista;
+    private javax.swing.JLabel labelFiltroPaciente;
     private javax.swing.JLabel labelImprimir;
     private javax.swing.JLabel labelLimpar;
     private javax.swing.JScrollPane scrollPaneExtrato;

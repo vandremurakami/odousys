@@ -30,8 +30,8 @@ public class panelListarPagamento extends javax.swing.JPanel {
         return tablePagamento; 
     }
     
-    public JComboBox getComboBoxDentista() {
-        return comboBoxDentista; 
+    public JComboBox getComboBoxPaciente() {
+        return comboBoxPaciente; 
     }
     
     /**
@@ -45,8 +45,8 @@ public class panelListarPagamento extends javax.swing.JPanel {
 
         scrollPaneTabelaPagamento = new javax.swing.JScrollPane();
         tablePagamento = new javax.swing.JTable();
-        labelFiltroDentista = new javax.swing.JLabel();
-        comboBoxDentista = new javax.swing.JComboBox<>();
+        labelFiltroPaciente = new javax.swing.JLabel();
+        comboBoxPaciente = new javax.swing.JComboBox<>();
         labelFechar = new javax.swing.JLabel();
         labelAbrir = new javax.swing.JLabel();
         labelAdicionar = new javax.swing.JLabel();
@@ -108,18 +108,18 @@ public class panelListarPagamento extends javax.swing.JPanel {
 
         add(scrollPaneTabelaPagamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, 1085, 410));
 
-        labelFiltroDentista.setText("Filtrar por Dentista:");
-        add(labelFiltroDentista, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, -1, -1));
+        labelFiltroPaciente.setText("Filtrar por Paciente:");
+        add(labelFiltroPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, -1, -1));
 
-        comboBoxDentista.setEditable(true);
-        comboBoxDentista.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Selecione uma das opções>" }));
-        AutoCompleteDecorator.decorate(comboBoxDentista);
-        comboBoxDentista.addActionListener(new java.awt.event.ActionListener() {
+        comboBoxPaciente.setEditable(true);
+        comboBoxPaciente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Selecione uma das opções>" }));
+        AutoCompleteDecorator.decorate(comboBoxPaciente);
+        comboBoxPaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboBoxDentistaActionPerformed(evt);
+                comboBoxPacienteActionPerformed(evt);
             }
         });
-        add(comboBoxDentista, new org.netbeans.lib.awtextra.AbsoluteConstraints(235, 35, 250, 25));
+        add(comboBoxPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(235, 35, 250, 25));
 
         labelFechar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelFechar.setText("Fechar");
@@ -215,24 +215,24 @@ public class panelListarPagamento extends javax.swing.JPanel {
     }//GEN-LAST:event_labelConfereMouseClicked
 
     private void labelLimparMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelLimparMouseClicked
-        comboBoxDentista.setSelectedIndex(0);
+        comboBoxPaciente.setSelectedIndex(0);
         if(controleListaPagamento != null)
             controleListaPagamento.PreencheTabelaPagamento();
     }//GEN-LAST:event_labelLimparMouseClicked
 
-    private void comboBoxDentistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxDentistaActionPerformed
+    private void comboBoxPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxPacienteActionPerformed
         if(controleListaPagamento != null)
             controleListaPagamento.PreencheTabelaPagamento();
-    }//GEN-LAST:event_comboBoxDentistaActionPerformed
+    }//GEN-LAST:event_comboBoxPacienteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> comboBoxDentista;
+    private javax.swing.JComboBox<String> comboBoxPaciente;
     private javax.swing.JLabel labelAbrir;
     private javax.swing.JLabel labelAdicionar;
     private javax.swing.JLabel labelConfere;
     private javax.swing.JLabel labelFechar;
-    private javax.swing.JLabel labelFiltroDentista;
+    private javax.swing.JLabel labelFiltroPaciente;
     private javax.swing.JLabel labelLimpar;
     private javax.swing.JScrollPane scrollPaneTabelaPagamento;
     private javax.swing.JTable tablePagamento;

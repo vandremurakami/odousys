@@ -173,7 +173,7 @@ public class framePrincipal extends javax.swing.JFrame {
         labelMenuDentista.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         labelMenuDentista.setForeground(new java.awt.Color(254, 254, 254));
         labelMenuDentista.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelMenuDentista.setText("Dentista");
+        labelMenuDentista.setText("Dentistas");
         labelMenuDentista.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 labelMenuDentistaMouseClicked(evt);
@@ -195,7 +195,7 @@ public class framePrincipal extends javax.swing.JFrame {
         labelMenuUsuario.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         labelMenuUsuario.setForeground(new java.awt.Color(254, 254, 254));
         labelMenuUsuario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelMenuUsuario.setText("Usuário");
+        labelMenuUsuario.setText("Usuários");
         labelMenuUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 labelMenuUsuarioMouseClicked(evt);
@@ -206,7 +206,7 @@ public class framePrincipal extends javax.swing.JFrame {
         labelMenuPaciente.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         labelMenuPaciente.setForeground(new java.awt.Color(254, 254, 254));
         labelMenuPaciente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelMenuPaciente.setText("Paciente");
+        labelMenuPaciente.setText("Pacientes");
         labelMenuPaciente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 labelMenuPacienteMouseClicked(evt);
@@ -316,11 +316,13 @@ public class framePrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_labelMenuBackupMouseClicked
 
     private void labelMenuUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelMenuUsuarioMouseClicked
-        // TODO add your handling code here:
+        panelMenuCadastro.setVisible(false);
+        controlePrincipal.mostraUsuario();
     }//GEN-LAST:event_labelMenuUsuarioMouseClicked
 
     private void labelMenuPacienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelMenuPacienteMouseClicked
-        // TODO add your handling code here:
+        panelMenuCadastro.setVisible(false);
+        controlePrincipal.mostraPaciente();
     }//GEN-LAST:event_labelMenuPacienteMouseClicked
 
     /**

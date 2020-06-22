@@ -42,13 +42,13 @@ public class panelCadastroPagamento extends javax.swing.JPanel {
         comboBoxStatus.setSelectedItem(nome);
     }
     
-    public int getPosicaoDentista() {
+    public int getPosicaoPaciente() {
         //o primeiro elemento da combobox não é válido
-        return comboBoxDentista.getSelectedIndex()-1;
+        return comboBoxPaciente.getSelectedIndex()-1;
     }
     
-    public void setNomeDentista(String nome) {
-        comboBoxDentista.setSelectedItem(nome);
+    public void setNomePaciente(String nome) {
+        comboBoxPaciente.setSelectedItem(nome);
     }
     
     public int getPosicaoTipoPagamento() {
@@ -87,8 +87,8 @@ public class panelCadastroPagamento extends javax.swing.JPanel {
         textAreaObservacao.setText(obs);
     }
     
-    public JComboBox getComboBoxDentista() {
-        return comboBoxDentista;
+    public JComboBox getComboBoxPaciente() {
+        return comboBoxPaciente;
     }
     
     public JComboBox getComboBoxStatus() {
@@ -101,7 +101,7 @@ public class panelCadastroPagamento extends javax.swing.JPanel {
     
     public void setNaoEditavel() {
         dateChooser.setEnabled(false);
-        comboBoxDentista.setEnabled(false);
+        comboBoxPaciente.setEnabled(false);
         textFieldValor.setEnabled(false);
         textFieldValor.setEnabled(false);
         comboBoxTipoPagamento.setEnabled(false);
@@ -110,7 +110,7 @@ public class panelCadastroPagamento extends javax.swing.JPanel {
     
     public void setEditavel() {
         dateChooser.setEnabled(true);
-        comboBoxDentista.setEnabled(true);
+        comboBoxPaciente.setEnabled(true);
         textFieldValor.setEnabled(true);
         textFieldValor.setEnabled(true);
         comboBoxTipoPagamento.setEnabled(true);
@@ -128,9 +128,9 @@ public class panelCadastroPagamento extends javax.swing.JPanel {
 
         labelSalvar = new javax.swing.JLabel();
         labelFechar = new javax.swing.JLabel();
-        labelDentista = new javax.swing.JLabel();
+        labelPaciente = new javax.swing.JLabel();
         comboBoxStatus = new javax.swing.JComboBox<>();
-        comboBoxDentista = new javax.swing.JComboBox<>();
+        comboBoxPaciente = new javax.swing.JComboBox<>();
         labelStatus = new javax.swing.JLabel();
         comboBoxTipoPagamento = new javax.swing.JComboBox<>();
         labelObservacao = new javax.swing.JLabel();
@@ -174,8 +174,8 @@ public class panelCadastroPagamento extends javax.swing.JPanel {
         });
         add(labelFechar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 440, -1, -1));
 
-        labelDentista.setText("Dentista:");
-        add(labelDentista, new org.netbeans.lib.awtextra.AbsoluteConstraints(185, 155, -1, -1));
+        labelPaciente.setText("Paciente:");
+        add(labelPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(185, 155, -1, -1));
 
         comboBoxStatus.setEditable(true);
         comboBoxStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Selecione uma das opções>" }));
@@ -187,9 +187,9 @@ public class panelCadastroPagamento extends javax.swing.JPanel {
         });
         add(comboBoxStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 150, 250, 25));
 
-        comboBoxDentista.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Selecione uma das opções>" }));
-        AutoCompleteDecorator.decorate(comboBoxDentista);
-        add(comboBoxDentista, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 150, 250, 25));
+        comboBoxPaciente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Selecione uma das opções>" }));
+        AutoCompleteDecorator.decorate(comboBoxPaciente);
+        add(comboBoxPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 150, 250, 25));
 
         labelStatus.setText("Status:");
         add(labelStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 155, -1, -1));
@@ -239,14 +239,14 @@ public class panelCadastroPagamento extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> comboBoxDentista;
+    private javax.swing.JComboBox<String> comboBoxPaciente;
     private javax.swing.JComboBox<String> comboBoxStatus;
     private javax.swing.JComboBox<String> comboBoxTipoPagamento;
     private com.toedter.calendar.JDateChooser dateChooser;
     private javax.swing.JLabel labelData;
-    private javax.swing.JLabel labelDentista;
     private javax.swing.JLabel labelFechar;
     private javax.swing.JLabel labelObservacao;
+    private javax.swing.JLabel labelPaciente;
     private javax.swing.JLabel labelSalvar;
     private javax.swing.JLabel labelStatus;
     private javax.swing.JLabel labelTipoPagamento;

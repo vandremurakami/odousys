@@ -5,7 +5,7 @@
  */
 package com.vandremurakami.odousys.controle;
 
-import com.vandremurakami.odousys.dao.DentistaDAO;
+import com.vandremurakami.odousys.dao.PacienteDAO;
 import com.vandremurakami.odousys.dao.PagamentoDAO;
 import com.vandremurakami.odousys.dao.StatusDAO;
 import com.vandremurakami.odousys.dao.TipoPagamentoDAO;
@@ -13,7 +13,7 @@ import com.vandremurakami.odousys.gui.caixaSenha;
 import com.vandremurakami.odousys.gui.panelCadastroPagamento;
 import java.math.BigDecimal;
 import java.util.List;
-import com.vandremurakami.odousys.modelo.Dentista;
+import com.vandremurakami.odousys.modelo.Paciente;
 import com.vandremurakami.odousys.modelo.Pagamento;
 import com.vandremurakami.odousys.modelo.Status;
 import com.vandremurakami.odousys.modelo.TipoPagamento;
@@ -30,11 +30,11 @@ public class ControleCadastroPagamento {
     
     private final StatusDAO statusDAO = new StatusDAO();
     private final TipoPagamentoDAO tipoPagamentoDAO = new TipoPagamentoDAO();
-    private final DentistaDAO dentistaDAO = new DentistaDAO();
+    private final PacienteDAO pacienteDAO = new PacienteDAO();
     private final PagamentoDAO pagamentoDAO = new PagamentoDAO();
     private List<Status> listaStatus;
     private List<TipoPagamento> listaTipoPagamento;
-    private List<Dentista> listaDentista;
+    private List<Paciente> listaPaciente;
 
     private final JDialog dialog;
     private final panelCadastroPagamento cadastroPagamento;
@@ -50,7 +50,7 @@ public class ControleCadastroPagamento {
     private void inicializaPanelCadastroPagamento() {
         PreencheComboBoxStatus(cadastroPagamento.getComboBoxStatus());
         PreencheComboBoxTipoPagamento(cadastroPagamento.getComboBoxTipoPagamento());
-        PreencheComboBoxDentista(cadastroPagamento.getComboBoxDentista());
+        PreencheComboBoxPaciente(cadastroPagamento.getComboBoxPaciente());
         PreencheCadastroPagamento();
     }
     
@@ -58,7 +58,7 @@ public class ControleCadastroPagamento {
         if(pagamento != null) {
             cadastroPagamento.setNomeStatus(pagamento.getStatus().getNome());
             cadastroPagamento.setDataPagamento(pagamento.getDataPagamento());
-            cadastroPagamento.setNomeDentista(pagamento.getDentista().getNome());
+            cadastroPagamento.setNomePaciente(pagamento.getPaciente().getNome());
             cadastroPagamento.setValor(pagamento.getValor().toString());
             cadastroPagamento.setNomeTipoPagamento(pagamento.getTipoPagamento().getNome());
             cadastroPagamento.setObservacao(pagamento.getObservacao());
@@ -76,7 +76,7 @@ public class ControleCadastroPagamento {
         pagamento.setData(LocalDate.now());
         pagamento.setStatus(listaStatus.get(cadastroPagamento.getPosicaoStatus()));
         pagamento.setDataPagamento(cadastroPagamento.getDataPagamento());
-        pagamento.setDentista(listaDentista.get(cadastroPagamento.getPosicaoDentista()));
+        pagamento.setPaciente(listaPaciente.get(cadastroPagamento.getPosicaoPaciente()));
         pagamento.setValor(new BigDecimal(cadastroPagamento.getValor()));
         pagamento.setTipoPagamento(listaTipoPagamento.get(cadastroPagamento.getPosicaoTipoPagamento()));
         pagamento.setObservacao(cadastroPagamento.getObservacao());
@@ -106,10 +106,10 @@ public class ControleCadastroPagamento {
         }
     }
     
-    public void PreencheComboBoxDentista(JComboBox combobox) {
-        listaDentista = dentistaDAO.BuscarDentistas();
-        for(int i = 0; i < listaDentista.size(); i++) {
-            combobox.addItem(listaDentista.get(i).getNome());
+    public void PreencheComboBoxPaciente(JComboBox combobox) {
+        listaPaciente = pacienteDAO.BuscarPacientes();
+        for(int i = 0; i < listaPaciente.size(); i++) {
+            combobox.addItem(listaPaciente.get(i).getNome());
         }  
     }
     
@@ -131,8 +131,8 @@ public class ControleCadastroPagamento {
             JOptionPane.showMessageDialog(null, "Status Finalizado não pode ser selecionado.");
             check = false;
         }
-        else if (cadastroPagamento.getComboBoxDentista().getSelectedIndex() == 0) {
-            JOptionPane.showMessageDialog(null, "Dentista não selecionado.");
+        else if (cadastroPagamento.getComboBoxPaciente().getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null, "Paciente não selecionado.");
             check = false;
         }
         else if (cadastroPagamento.getValor().isBlank()) {
