@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <senha>$2a$10$vaBbYOvZRNW0IncXNOnYxuTvdwAknhKBGLdnnnmDuyNAcJW/tOuBe</senha>
+    <caminhoBackupBD>/home/sueli/gdrive/protolab/backupBD</caminhoBackupBD>
+</config>

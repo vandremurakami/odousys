@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/odousys</property>
+    <property name="hibernate.current_session_context_class">thread</property>
+  </session-factory>
+</hibernate-configuration>
