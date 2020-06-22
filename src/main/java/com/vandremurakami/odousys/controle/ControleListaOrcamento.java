@@ -5,12 +5,12 @@
  */
 package com.vandremurakami.odousys.controle;
 
-import com.vandremurakami.odousys.dao.DentistaDAO;
+import com.vandremurakami.odousys.dao.PacienteDAO;
 import com.vandremurakami.odousys.dao.OrcamentoDAO;
 import com.vandremurakami.odousys.gui.dialogCadastro;
 import com.vandremurakami.odousys.gui.panelListarOrcamento;
 import com.vandremurakami.odousys.gui.panelCadastroOrcamento;
-import com.vandremurakami.odousys.modelo.Dentista;
+import com.vandremurakami.odousys.modelo.Paciente;
 import java.awt.Color;
 import java.awt.Component;
 import java.time.format.DateTimeFormatter;
@@ -33,12 +33,12 @@ public class ControleListaOrcamento {
     private final panelListarOrcamento painelListaOrcamento;
     
     private final OrcamentoDAO orcamentoDAO = new OrcamentoDAO();
-    private final DentistaDAO dentistaDAO = new DentistaDAO();
+    private final PacienteDAO pacienteDAO = new PacienteDAO();
     private List<Orcamento> listaOrcamento;
-    private List<Dentista> listaDentista;
+    private List<Paciente> listaPaciente;
     private List<Orcamento> listaFiltradaOrcamento;
     
-    private final int NUM_COLUNA_STATUS = 5;
+    private final int NUM_COLUNA_STATUS = 4;
 
     public ControleListaOrcamento(panelListarOrcamento panel) {
         this.painelListaOrcamento = panel;
@@ -57,37 +57,22 @@ public class ControleListaOrcamento {
     }
     
     public void PreencheTabelaOrcamento() {        
-        List<Orcamento> listaFiltrada;
         
-        int linhaSelecionada = painelListaOrcamento.getComboBoxDentista().getSelectedIndex();
+        int linhaSelecionada = painelListaOrcamento.getComboBoxPaciente().getSelectedIndex();
         if (linhaSelecionada == 0) {            
             listaFiltradaOrcamento = listaOrcamento;
             
         } else if (linhaSelecionada > 0) {
         
-            Dentista dentista = listaDentista.get(linhaSelecionada-1);
+            Paciente paciente = listaPaciente.get(linhaSelecionada-1);
             
             listaFiltradaOrcamento = new ArrayList<>();
                 listaFiltradaOrcamento.addAll(listaOrcamento.parallelStream()
-                        .filter(object -> (object.getDentista().getCodigo() == dentista.getCodigo()))
+                        .filter(object -> (object.getPaciente().getCodigo() == paciente.getCodigo()))
                         .collect(Collectors.toList()));
             //filtra objetos duplicados que caem em mais de um filtro
             listaFiltradaOrcamento = listaFiltradaOrcamento.stream().distinct().collect(Collectors.toList());
 
-        }
-        
-        //filtra a lista contendo palavras chaves do textFieldFiltro
-        if(!painelListaOrcamento.getFiltro().isBlank()) {
-            listaFiltrada = new ArrayList<>();
-            String[] splitStr = painelListaOrcamento.getFiltro().split("\\s+", 10);
-            for (String splitStr1 : splitStr) {
-                String palavraChave = splitStr1.toLowerCase();
-                listaFiltrada.addAll(listaFiltradaOrcamento.parallelStream()
-                        .filter(object -> (object.getPaciente().getNome().toLowerCase().contains(palavraChave)))
-                        .collect(Collectors.toList()));
-            }
-            //filtra objetos duplicados que caem em mais de um filtro
-            listaFiltradaOrcamento = listaFiltrada.stream().distinct().collect(Collectors.toList());
         }
         
         DefaultTableModel tabela = (DefaultTableModel) painelListaOrcamento.getTabelaOrcamento().getModel();
@@ -97,7 +82,7 @@ public class ControleListaOrcamento {
             Orcamento o = listaFiltradaOrcamento.get(i);
             
             Object[] dados = {o.getCodigo(), o.getData().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT)), 
-                o.getDentista().getNome(), o.getPaciente(), o.getValorFinal(), o.getStatus().getNome()};
+                o.getPaciente(), o.getValorFinal(), o.getStatus().getNome()};
             tabela.addRow(dados);
 
 
@@ -110,9 +95,9 @@ public class ControleListaOrcamento {
         dialogCadastro dialogOrcamento = new dialogCadastro(ControlePrincipal.framePrincipal, true);
         panelCadastroOrcamento cadastroOrcamento = new panelCadastroOrcamento(dialogOrcamento, null);
         
-        int posicao = painelListaOrcamento.getComboBoxDentista().getSelectedIndex()-1;
+        int posicao = painelListaOrcamento.getComboBoxPaciente().getSelectedIndex()-1;
         if(posicao >= 0)
-             cadastroOrcamento.setNomeDentista(listaDentista.get(posicao).getNome());
+             cadastroOrcamento.setNomeDentista(listaPaciente.get(posicao).getNome());
         
         dialogOrcamento.setWindowName("Cadastro de Orcamento");
         dialogOrcamento.setPanel(cadastroOrcamento);
@@ -144,9 +129,9 @@ public class ControleListaOrcamento {
     }
 
     private void PreencheComboboxDentista() {
-        listaDentista = dentistaDAO.BuscarDentistas();
-        for(int i = 0; i < listaDentista.size(); i++) {
-            painelListaOrcamento.getComboBoxDentista().addItem(listaDentista.get(i).getNome());
+        listaPaciente = pacienteDAO.BuscarPacientes();
+        for(int i = 0; i < listaPaciente.size(); i++) {
+            painelListaOrcamento.getComboBoxPaciente().addItem(listaPaciente.get(i).getNome());
         } 
     }
 

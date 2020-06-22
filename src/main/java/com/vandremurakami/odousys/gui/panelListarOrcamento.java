@@ -31,12 +31,8 @@ public class panelListarOrcamento extends javax.swing.JPanel {
         return tableOrcamento; 
     }
     
-    public JComboBox getComboBoxDentista() {
-        return comboBoxDentista; 
-    }
-    
-    public String getFiltro() {
-        return textFieldPaciente.getText().trim();
+    public JComboBox getComboBoxPaciente() {
+        return comboBoxPaciente; 
     }
     
     /**
@@ -50,15 +46,12 @@ public class panelListarOrcamento extends javax.swing.JPanel {
 
         scrollPaneTabelaOrcamento = new javax.swing.JScrollPane();
         tableOrcamento = new javax.swing.JTable();
-        labelFiltroDentista = new javax.swing.JLabel();
-        comboBoxDentista = new javax.swing.JComboBox<>();
+        labelFiltroPaciente = new javax.swing.JLabel();
+        comboBoxPaciente = new javax.swing.JComboBox<>();
         labelAdicionar = new javax.swing.JLabel();
         labelAbrir = new javax.swing.JLabel();
         labelFechar = new javax.swing.JLabel();
         labelLimpar = new javax.swing.JLabel();
-        labelFiltroPaciente = new javax.swing.JLabel();
-        textFieldPaciente = new javax.swing.JTextField();
-        labelLimparFiltroPaciente = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(254, 254, 254));
         setMaximumSize(new java.awt.Dimension(1260, 630));
@@ -75,14 +68,14 @@ public class panelListarOrcamento extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Código", "Data", "Dentista", "Paciente", "Valor Total", "Status"
+                "Código", "Data", "Paciente", "Valor Total", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -105,18 +98,18 @@ public class panelListarOrcamento extends javax.swing.JPanel {
 
         add(scrollPaneTabelaOrcamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, 1085, 410));
 
-        labelFiltroDentista.setText("Filtrar por Dentista:");
-        add(labelFiltroDentista, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, -1, -1));
+        labelFiltroPaciente.setText("Filtrar por Paciente:");
+        add(labelFiltroPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, -1, -1));
 
-        comboBoxDentista.setEditable(true);
-        comboBoxDentista.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Selecione uma das opções>" }));
-        AutoCompleteDecorator.decorate(comboBoxDentista);
-        comboBoxDentista.addActionListener(new java.awt.event.ActionListener() {
+        comboBoxPaciente.setEditable(true);
+        comboBoxPaciente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Selecione uma das opções>" }));
+        AutoCompleteDecorator.decorate(comboBoxPaciente);
+        comboBoxPaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboBoxDentistaActionPerformed(evt);
+                comboBoxPacienteActionPerformed(evt);
             }
         });
-        add(comboBoxDentista, new org.netbeans.lib.awtextra.AbsoluteConstraints(235, 35, 250, 25));
+        add(comboBoxPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(235, 35, 250, 25));
 
         labelAdicionar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelAdicionar.setText("Adicionar");
@@ -169,29 +162,6 @@ public class panelListarOrcamento extends javax.swing.JPanel {
             }
         });
         add(labelLimpar, new org.netbeans.lib.awtextra.AbsoluteConstraints(505, 30, -1, -1));
-
-        labelFiltroPaciente.setText("Filtrar por Paciente:");
-        add(labelFiltroPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 40, -1, -1));
-
-        textFieldPaciente.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                textFieldPacienteKeyPressed(evt);
-            }
-        });
-        add(textFieldPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 35, 250, 25));
-
-        labelLimparFiltroPaciente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelLimparFiltroPaciente.setText("Limpar");
-        labelLimparFiltroPaciente.setMaximumSize(new java.awt.Dimension(90, 35));
-        labelLimparFiltroPaciente.setMinimumSize(new java.awt.Dimension(90, 35));
-        labelLimparFiltroPaciente.setOpaque(true);
-        labelLimparFiltroPaciente.setPreferredSize(new java.awt.Dimension(90, 35));
-        labelLimparFiltroPaciente.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                labelLimparFiltroPacienteMouseClicked(evt);
-            }
-        });
-        add(labelLimparFiltroPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 30, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void tableOrcamentoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableOrcamentoMouseClicked
@@ -217,42 +187,25 @@ public class panelListarOrcamento extends javax.swing.JPanel {
     }//GEN-LAST:event_labelFecharMouseClicked
 
     private void labelLimparMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelLimparMouseClicked
-        comboBoxDentista.setSelectedIndex(0);
+        comboBoxPaciente.setSelectedIndex(0);
         if(controleListaOrcamento != null)
             controleListaOrcamento.PreencheTabelaOrcamento();
     }//GEN-LAST:event_labelLimparMouseClicked
 
-    private void labelLimparFiltroPacienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelLimparFiltroPacienteMouseClicked
-        textFieldPaciente.setText("");
+    private void comboBoxPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxPacienteActionPerformed
         if(controleListaOrcamento != null)
             controleListaOrcamento.PreencheTabelaOrcamento();
-    }//GEN-LAST:event_labelLimparFiltroPacienteMouseClicked
-
-    private void textFieldPacienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textFieldPacienteKeyPressed
-        int key = evt.getKeyCode();
-        if (key == KeyEvent.VK_ENTER) {
-            if(controleListaOrcamento != null)
-                controleListaOrcamento.PreencheTabelaOrcamento();
-        }
-    }//GEN-LAST:event_textFieldPacienteKeyPressed
-
-    private void comboBoxDentistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxDentistaActionPerformed
-        if(controleListaOrcamento != null)
-            controleListaOrcamento.PreencheTabelaOrcamento();
-    }//GEN-LAST:event_comboBoxDentistaActionPerformed
+    }//GEN-LAST:event_comboBoxPacienteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> comboBoxDentista;
+    private javax.swing.JComboBox<String> comboBoxPaciente;
     private javax.swing.JLabel labelAbrir;
     private javax.swing.JLabel labelAdicionar;
     private javax.swing.JLabel labelFechar;
-    private javax.swing.JLabel labelFiltroDentista;
     private javax.swing.JLabel labelFiltroPaciente;
     private javax.swing.JLabel labelLimpar;
-    private javax.swing.JLabel labelLimparFiltroPaciente;
     private javax.swing.JScrollPane scrollPaneTabelaOrcamento;
     private javax.swing.JTable tableOrcamento;
-    private javax.swing.JTextField textFieldPaciente;
     // End of variables declaration//GEN-END:variables
 }
