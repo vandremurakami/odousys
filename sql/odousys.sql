@@ -180,7 +180,7 @@ insert into horarios_agenda(hora) values ('19:00:00');
 
 insert into status values (1, 'Aberto');
 insert into status values (2, 'Cancelado');
-insert into status values (3, 'Finalizado');
+insert into status values (3, 'Aprovado');
 
 insert into tipo_pagamento values (1, 'Dinheiro');
 insert into tipo_pagamento values (2, 'Cheque');

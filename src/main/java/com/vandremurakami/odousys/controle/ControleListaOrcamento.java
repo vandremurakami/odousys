@@ -174,7 +174,7 @@ public class ControleListaOrcamento {
                     case "Aberto":
                         c.setBackground(Color.BLUE);
                         break;
-                    case "Finalizado":
+                    case "Aprovado":
                         c.setBackground(Color.GREEN);
                         break;
                     case "Cancelado":

@@ -54,11 +54,11 @@ public class PagamentoDAO {
         List<Pagamento> listaPagamento;
         session = sessionFactory.openSession();
         
-        Status statusFinalizado = new StatusDAO().BuscarStatusFinalizado();
+        Status statusAprovado = new StatusDAO().BuscarStatusAprovado();
         
         Query query = session.createQuery("from Pagamento where dentista = :dentista and status = :status order by data_pagamento asc, codigo asc", Pagamento.class)
                 .setParameter("dentista", dentista)
-                .setParameter("status", statusFinalizado);
+                .setParameter("status", statusAprovado);
         
         listaPagamento = query.getResultList();
         session.close();
@@ -70,10 +70,10 @@ public class PagamentoDAO {
         List<Pagamento> listaPagamento;
         session = sessionFactory.openSession();
         
-        Status statusFinalizado = new StatusDAO().BuscarStatusFinalizado();
+        Status statusAprovado = new StatusDAO().BuscarStatusAprovado();
         
         Query query = session.createQuery("from Pagamento where status = :status order by data_pagamento asc, codigo asc", Pagamento.class)
-                .setParameter("status", statusFinalizado);
+                .setParameter("status", statusAprovado);
         
         listaPagamento = query.getResultList();
         session.close();

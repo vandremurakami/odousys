@@ -149,7 +149,7 @@ public class ControleListaPagamento {
             caixa.setVisible(true);
             if (caixa.senhaValida()) {
 
-                Status statusFinalizado = statusDAO.BuscarStatusFinalizado();
+                Status statusAprovado = statusDAO.BuscarStatusAprovado();
 
                 DefaultTableModel tabela = (DefaultTableModel) painelListaPagamento.getTabelaPagamento().getModel();
                 for(int i = 0; i < listaFiltradaPagamento.size(); i++) { 
@@ -159,7 +159,7 @@ public class ControleListaPagamento {
                         boolean checado = (boolean) tabela.getValueAt(i, NUM_COLUNA_CHECADO);
 
                         if( checado ) {
-                            p.setStatus(statusFinalizado);
+                            p.setStatus(statusAprovado);
                             pagamentoDAO.SalvaAtualiza(p);
                         }                    
 
@@ -185,7 +185,7 @@ public class ControleListaPagamento {
                     case "Aberto":
                         c.setBackground(Color.BLUE);
                         break;
-                    case "Finalizado":
+                    case "Aprovado":
                         c.setBackground(Color.GREEN);
                         break;
                     case "Cancelado":

@@ -56,11 +56,11 @@ public class OrcamentoDAO {
         List<Orcamento> listaOrcamento;
         session = sessionFactory.openSession();
         
-        Status statusFinalizado = new StatusDAO().BuscarStatusFinalizado();
+        Status statusAprovado = new StatusDAO().BuscarStatusAprovado();
         
         Query query = session.createQuery("from Orcamento o where o.dentista = :dentista and o.status = :status order by data asc, codigo asc", Orcamento.class)
                 .setParameter("dentista", dentista)
-                .setParameter("status", statusFinalizado);
+                .setParameter("status", statusAprovado);
 
         listaOrcamento = query.getResultList();
         session.close();
@@ -72,10 +72,10 @@ public class OrcamentoDAO {
         List<Orcamento> listaOrcamento;
         session = sessionFactory.openSession();
         
-        Status statusFinalizado = new StatusDAO().BuscarStatusFinalizado();
+        Status statusAprovado = new StatusDAO().BuscarStatusAprovado();
         
         Query query = session.createQuery("from Orcamento o where o.status = :status order by data asc, codigo asc", Orcamento.class)
-                .setParameter("status", statusFinalizado);
+                .setParameter("status", statusAprovado);
 
         listaOrcamento = query.getResultList();
         session.close();

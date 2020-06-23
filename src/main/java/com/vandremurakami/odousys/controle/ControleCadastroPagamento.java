@@ -62,7 +62,7 @@ public class ControleCadastroPagamento {
             cadastroPagamento.setValor(pagamento.getValor().toString());
             cadastroPagamento.setNomeTipoPagamento(pagamento.getTipoPagamento().getNome());
             cadastroPagamento.setObservacao(pagamento.getObservacao());
-            if(pagamento.getStatus().getCodigo() == StatusDAO.STATUS_FINALIZADO)
+            if(pagamento.getStatus().getCodigo() == StatusDAO.STATUS_APROVADO)
                 cadastroPagamento.setNaoEditavel();
         }
         else {
@@ -127,8 +127,8 @@ public class ControleCadastroPagamento {
             JOptionPane.showMessageDialog(null, "Status não selecionado.");
             check = false;
         }
-        else if (listaStatus.get(cadastroPagamento.getPosicaoStatus()).getCodigo() == StatusDAO.STATUS_FINALIZADO) {
-            JOptionPane.showMessageDialog(null, "Status Finalizado não pode ser selecionado.");
+        else if (listaStatus.get(cadastroPagamento.getPosicaoStatus()).getCodigo() == StatusDAO.STATUS_APROVADO) {
+            JOptionPane.showMessageDialog(null, "Status Aprovado não pode ser selecionado.");
             check = false;
         }
         else if (cadastroPagamento.getComboBoxPaciente().getSelectedIndex() == 0) {
@@ -147,8 +147,8 @@ public class ControleCadastroPagamento {
             JOptionPane.showMessageDialog(null, "Data do pagamento não selecionado.");
             check = false;
         }
-        else if ((pagamento != null) && (pagamento.getCodigo() !=0 ) && (pagamento.getStatus().getCodigo() == StatusDAO.STATUS_FINALIZADO) && 
-                (listaStatus.get(cadastroPagamento.getPosicaoStatus()).getCodigo() != StatusDAO.STATUS_FINALIZADO)) {
+        else if ((pagamento != null) && (pagamento.getCodigo() !=0 ) && (pagamento.getStatus().getCodigo() == StatusDAO.STATUS_APROVADO) && 
+                (listaStatus.get(cadastroPagamento.getPosicaoStatus()).getCodigo() != StatusDAO.STATUS_APROVADO)) {
             caixaSenha caixa = new caixaSenha(ControlePrincipal.framePrincipal);
             caixa.setVisible(true);
             if (!caixa.senhaValida()) {

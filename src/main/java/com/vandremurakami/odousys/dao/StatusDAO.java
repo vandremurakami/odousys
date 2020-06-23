@@ -21,7 +21,7 @@ public class StatusDAO {
     
     public final static int STATUS_ABERTO = 1;
     public final static int STATUS_CANCELADO = 2;
-    public final static int STATUS_FINALIZADO = 3;
+    public final static int STATUS_APROVADO = 3;
     
     
     SessionFactory  sessionFactory  = HibernateUtil.getSessionFactory();
@@ -53,12 +53,12 @@ public class StatusDAO {
         return status;
     }
     
-    public Status BuscarStatusFinalizado() throws HibernateException {
+    public Status BuscarStatusAprovado() throws HibernateException {
 
         session = sessionFactory.openSession();
         
         Query query = session.createQuery("from Status where codigo = :codigo", Status.class)
-                .setParameter("codigo", STATUS_FINALIZADO);
+                .setParameter("codigo", STATUS_APROVADO);
         
         Status status = (Status)query.getSingleResult();
         session.close();

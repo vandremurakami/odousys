@@ -88,7 +88,7 @@ public class ControleCadastroOrcamento {
             cadastroOrcamento.setObservacao(orcamento.getObservacao());
             listaServicoOrcamentos = orcamento.getServicoOrcamento();
             PreencheTabelaServicosOrcamento();
-            if(orcamento.getStatus().getCodigo() == StatusDAO.STATUS_FINALIZADO)
+            if(orcamento.getStatus().getCodigo() == StatusDAO.STATUS_APROVADO)
                 cadastroOrcamento.setNaoEditavel();
         }
         else {

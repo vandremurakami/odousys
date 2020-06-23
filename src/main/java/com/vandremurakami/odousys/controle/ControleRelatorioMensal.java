@@ -45,7 +45,7 @@ public class ControleRelatorioMensal {
             Pagamento p = listaPagamento.get(i);
             
             if ( (p.getTipoPagamento().getCodigo() == TipoPagamentoDAO.TIPO_PAGAMENTO_CHEQUE) && 
-                    (p.getStatus().getCodigo() == StatusDAO.STATUS_FINALIZADO) ) {
+                    (p.getStatus().getCodigo() == StatusDAO.STATUS_APROVADO) ) {
                 numeroPagamentos ++;
             }
 
@@ -61,7 +61,7 @@ public class ControleRelatorioMensal {
             Pagamento p = listaPagamento.get(i);
             
             if ( (p.getTipoPagamento().getCodigo() == TipoPagamentoDAO.TIPO_PAGAMENTO_DINHEIRO) && 
-                    (p.getStatus().getCodigo() == StatusDAO.STATUS_FINALIZADO) ) {
+                    (p.getStatus().getCodigo() == StatusDAO.STATUS_APROVADO) ) {
                 numeroPagamentos ++;
             }
 
@@ -77,7 +77,7 @@ public class ControleRelatorioMensal {
             Pagamento p = listaPagamento.get(i);
             
             if ( (p.getTipoPagamento().getCodigo() == TipoPagamentoDAO.TIPO_PAGAMENTO_CHEQUE) && 
-                    (p.getStatus().getCodigo() == StatusDAO.STATUS_FINALIZADO) ) {
+                    (p.getStatus().getCodigo() == StatusDAO.STATUS_APROVADO) ) {
                 valor = valor.add(p.getValor());
             }
 
@@ -93,7 +93,7 @@ public class ControleRelatorioMensal {
             Pagamento p = listaPagamento.get(i);
             
             if ( (p.getTipoPagamento().getCodigo() == TipoPagamentoDAO.TIPO_PAGAMENTO_DINHEIRO) && 
-                    (p.getStatus().getCodigo() == StatusDAO.STATUS_FINALIZADO) ) {
+                    (p.getStatus().getCodigo() == StatusDAO.STATUS_APROVADO) ) {
                 valor = valor.add(p.getValor());
             }
 
@@ -107,7 +107,7 @@ public class ControleRelatorioMensal {
         
         for(int i = 0; i < listaPagamento.size(); i++) { 
             Pagamento p = listaPagamento.get(i);
-            if ((p.getStatus().getCodigo() == StatusDAO.STATUS_FINALIZADO) ) {
+            if ((p.getStatus().getCodigo() == StatusDAO.STATUS_APROVADO) ) {
                 valor = valor.add(p.getValor());
             }
         }
@@ -120,7 +120,7 @@ public class ControleRelatorioMensal {
         
         for(int i = 0; i < listaOrcamento.size(); i++) { 
             Orcamento o = listaOrcamento.get(i);
-            if ( (o.getStatus().getCodigo() == StatusDAO.STATUS_FINALIZADO) ) {
+            if ( (o.getStatus().getCodigo() == StatusDAO.STATUS_APROVADO) ) {
                 numero++;
             }
         }
@@ -132,7 +132,7 @@ public class ControleRelatorioMensal {
         
         for(int i = 0; i < listaOrcamento.size(); i++) { 
             Orcamento o = listaOrcamento.get(i);
-            if ( (o.getStatus().getCodigo() == StatusDAO.STATUS_FINALIZADO) ) {
+            if ( (o.getStatus().getCodigo() == StatusDAO.STATUS_APROVADO) ) {
                 valor = valor.add(o.getValorFinal());
             }
         }
