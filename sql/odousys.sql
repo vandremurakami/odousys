@@ -109,6 +109,21 @@ CREATE TABLE orcamento (
 ALTER TABLE orcamento OWNER TO odousys;
 
 
+CREATE TABLE servico_orcamento(
+    codigo serial not null,
+    cod_orcamento integer NOT NULL,
+    cod_preco integer NOT NULL,
+    quantidade integer NOT NULL DEFAULT 1,
+    observacao character varying(120) COLLATE pg_catalog."default",
+    porcentagem_desconto numeric(14,2) DEFAULT 0,
+    valor_desconto numeric(14,2) DEFAULT 0,
+    primary key(codigo),
+    foreign key(cod_orcamento) references orcamento(codigo),
+    foreign key(cod_preco) references preco(codigo)
+);
+ALTER TABLE servico_orcamento OWNER TO odousys;
+
+
 CREATE TABLE tipo_pagamento (
     codigo serial NOT NULL,
     nome varchar(20) NOT NULL,
@@ -132,6 +147,7 @@ CREATE TABLE pagamento (
     foreign key(cod_status) references status(codigo)
 );
 ALTER TABLE pagamento OWNER TO odousys;
+
 
 -- Inserts --
 
@@ -166,3 +182,10 @@ insert into horarios_agenda(hora) values ('19:00:00');
 insert into status values (1, 'Aberto');
 insert into status values (2, 'Cancelado');
 insert into status values (3, 'Finalizado');
+
+insert into tipo_pagamento values (1, 'Dinheiro');
+insert into tipo_pagamento values (2, 'Cheque');
+insert into tipo_pagamento values (3, 'Depósito');
+insert into tipo_pagamento values (4, 'Débito');
+insert into tipo_pagamento values (5, 'Crédito');
+

@@ -35,6 +35,10 @@ public class panelListarOrcamento extends javax.swing.JPanel {
         return comboBoxPaciente; 
     }
     
+    public JComboBox getComboBoxDentista() {
+        return comboBoxDentista; 
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -51,7 +55,10 @@ public class panelListarOrcamento extends javax.swing.JPanel {
         labelAdicionar = new javax.swing.JLabel();
         labelAbrir = new javax.swing.JLabel();
         labelFechar = new javax.swing.JLabel();
-        labelLimpar = new javax.swing.JLabel();
+        labelLimparPaciente = new javax.swing.JLabel();
+        labelFiltroDentista = new javax.swing.JLabel();
+        comboBoxDentista = new javax.swing.JComboBox<>();
+        labelLimparDentista = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(254, 254, 254));
         setMaximumSize(new java.awt.Dimension(1260, 630));
@@ -68,14 +75,14 @@ public class panelListarOrcamento extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Código", "Data", "Paciente", "Valor Total", "Status"
+                "Código", "Data", "Dentista", "Paciente", "Valor Total", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -150,18 +157,44 @@ public class panelListarOrcamento extends javax.swing.JPanel {
         });
         add(labelFechar, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 570, -1, -1));
 
-        labelLimpar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelLimpar.setText("Limpar");
-        labelLimpar.setMaximumSize(new java.awt.Dimension(90, 35));
-        labelLimpar.setMinimumSize(new java.awt.Dimension(90, 35));
-        labelLimpar.setOpaque(true);
-        labelLimpar.setPreferredSize(new java.awt.Dimension(90, 35));
-        labelLimpar.addMouseListener(new java.awt.event.MouseAdapter() {
+        labelLimparPaciente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelLimparPaciente.setText("Limpar");
+        labelLimparPaciente.setMaximumSize(new java.awt.Dimension(90, 35));
+        labelLimparPaciente.setMinimumSize(new java.awt.Dimension(90, 35));
+        labelLimparPaciente.setOpaque(true);
+        labelLimparPaciente.setPreferredSize(new java.awt.Dimension(90, 35));
+        labelLimparPaciente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                labelLimparMouseClicked(evt);
+                labelLimparPacienteMouseClicked(evt);
             }
         });
-        add(labelLimpar, new org.netbeans.lib.awtextra.AbsoluteConstraints(505, 30, -1, -1));
+        add(labelLimparPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(505, 30, -1, -1));
+
+        labelFiltroDentista.setText("Filtrar por Dentista:");
+        add(labelFiltroDentista, new org.netbeans.lib.awtextra.AbsoluteConstraints(655, 40, -1, -1));
+
+        comboBoxDentista.setEditable(true);
+        comboBoxDentista.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Selecione uma das opções>" }));
+        AutoCompleteDecorator.decorate(comboBoxPaciente);
+        comboBoxDentista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxDentistaActionPerformed(evt);
+            }
+        });
+        add(comboBoxDentista, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 35, 250, 25));
+
+        labelLimparDentista.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelLimparDentista.setText("Limpar");
+        labelLimparDentista.setMaximumSize(new java.awt.Dimension(90, 35));
+        labelLimparDentista.setMinimumSize(new java.awt.Dimension(90, 35));
+        labelLimparDentista.setOpaque(true);
+        labelLimparDentista.setPreferredSize(new java.awt.Dimension(90, 35));
+        labelLimparDentista.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                labelLimparDentistaMouseClicked(evt);
+            }
+        });
+        add(labelLimparDentista, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 30, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void tableOrcamentoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableOrcamentoMouseClicked
@@ -186,25 +219,39 @@ public class panelListarOrcamento extends javax.swing.JPanel {
             controleListaOrcamento.FecharListaOrcamento();
     }//GEN-LAST:event_labelFecharMouseClicked
 
-    private void labelLimparMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelLimparMouseClicked
+    private void labelLimparPacienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelLimparPacienteMouseClicked
         comboBoxPaciente.setSelectedIndex(0);
         if(controleListaOrcamento != null)
             controleListaOrcamento.PreencheTabelaOrcamento();
-    }//GEN-LAST:event_labelLimparMouseClicked
+    }//GEN-LAST:event_labelLimparPacienteMouseClicked
 
     private void comboBoxPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxPacienteActionPerformed
         if(controleListaOrcamento != null)
             controleListaOrcamento.PreencheTabelaOrcamento();
     }//GEN-LAST:event_comboBoxPacienteActionPerformed
 
+    private void comboBoxDentistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxDentistaActionPerformed
+        if(controleListaOrcamento != null)
+            controleListaOrcamento.PreencheTabelaOrcamento();
+    }//GEN-LAST:event_comboBoxDentistaActionPerformed
+
+    private void labelLimparDentistaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelLimparDentistaMouseClicked
+        comboBoxDentista.setSelectedIndex(0);
+        if(controleListaOrcamento != null)
+            controleListaOrcamento.PreencheTabelaOrcamento();
+    }//GEN-LAST:event_labelLimparDentistaMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> comboBoxDentista;
     private javax.swing.JComboBox<String> comboBoxPaciente;
     private javax.swing.JLabel labelAbrir;
     private javax.swing.JLabel labelAdicionar;
     private javax.swing.JLabel labelFechar;
+    private javax.swing.JLabel labelFiltroDentista;
     private javax.swing.JLabel labelFiltroPaciente;
-    private javax.swing.JLabel labelLimpar;
+    private javax.swing.JLabel labelLimparDentista;
+    private javax.swing.JLabel labelLimparPaciente;
     private javax.swing.JScrollPane scrollPaneTabelaOrcamento;
     private javax.swing.JTable tableOrcamento;
     // End of variables declaration//GEN-END:variables

@@ -7,6 +7,7 @@ package com.vandremurakami.odousys.controle;
 
 import com.vandremurakami.odousys.dao.DentistaDAO;
 import com.vandremurakami.odousys.dao.OrcamentoDAO;
+import com.vandremurakami.odousys.dao.PacienteDAO;
 import com.vandremurakami.odousys.dao.ServicoOrcamentoDAO;
 import com.vandremurakami.odousys.dao.StatusDAO;
 import com.vandremurakami.odousys.dao.TabelaPrecoDAO;
@@ -17,6 +18,7 @@ import com.vandremurakami.odousys.gui.panelCadastroServicoOrcamento;
 import com.vandremurakami.odousys.modelo.Dentista;
 import java.util.List;
 import com.vandremurakami.odousys.modelo.Orcamento;
+import com.vandremurakami.odousys.modelo.Paciente;
 import com.vandremurakami.odousys.modelo.ServicoOrcamento;
 import com.vandremurakami.odousys.modelo.Status;
 import com.vandremurakami.odousys.modelo.TabelaPreco;
@@ -37,10 +39,12 @@ public class ControleCadastroOrcamento {
     
     private final OrcamentoDAO orcamentoDAO = new OrcamentoDAO();
     private final DentistaDAO dentistaDAO = new DentistaDAO();
+    private final PacienteDAO pacienteDAO = new PacienteDAO();
     private final StatusDAO statusDAO = new StatusDAO();
     private final TabelaPrecoDAO tabelaPrecoDAO = new TabelaPrecoDAO();
     private final ServicoOrcamentoDAO servicoOrcamentoDAO= new ServicoOrcamentoDAO();
     private List<Dentista> listaDentista;
+    private List<Paciente> listaPaciente;
     private List<Status> listaStatus;
     private List<ServicoOrcamento> listaServicoOrcamentos = new ArrayList<>();
     
@@ -58,6 +62,7 @@ public class ControleCadastroOrcamento {
     
     private void inicializaPanelCadastroOrcamento() {
         PreencheComboboxDentista(cadastroOrcamento.getComboBoxDentista());
+        PreencheComboboxPaciente(cadastroOrcamento.getComboBoxPaciente());
         PreencheComboboxStatus(cadastroOrcamento.getComboBoxStatus());
         EscolheTabelaPreco();
         PreencheCadastroOrcamento();
@@ -75,7 +80,7 @@ public class ControleCadastroOrcamento {
     private void PreencheCadastroOrcamento() {
         if(orcamento != null) {
             cadastroOrcamento.setNomeDentista(orcamento.getDentista().getNome());
-            cadastroOrcamento.setPaciente(orcamento.getPaciente().getNome());
+            cadastroOrcamento.setNomePaciente(orcamento.getPaciente().getNome());
             cadastroOrcamento.setNomeStatus(orcamento.getStatus().getNome());
             cadastroOrcamento.setPorcentagemDesconto(orcamento.getPorcentagemDesconto().toString());
             cadastroOrcamento.setValorDesconto(orcamento.getValorDesconto().toString());
@@ -120,7 +125,7 @@ public class ControleCadastroOrcamento {
             orcamento = new Orcamento();
         
         orcamento.setDentista(listaDentista.get(cadastroOrcamento.getPosicaoDentista()));
-//        orcamento.setPaciente(cadastroOrcamento.getPaciente());
+        orcamento.setPaciente(listaPaciente.get(cadastroOrcamento.getPosicaoPaciente()));
         orcamento.setStatus(listaStatus.get(cadastroOrcamento.getPosicaoStatus()));
         orcamento.setData(LocalDate.now());
         if(!cadastroOrcamento.getPorcentagemDesconto().equals(""))
@@ -159,6 +164,13 @@ public class ControleCadastroOrcamento {
         listaDentista = dentistaDAO.BuscarDentistas();
         for(int i = 0; i < listaDentista.size(); i++) {
             comboBoxDentista.addItem(listaDentista.get(i).getNome());
+        } 
+    }
+    
+    private void PreencheComboboxPaciente(JComboBox<String> comboBoxPaciente) {
+        listaPaciente = pacienteDAO.BuscarPacientes();
+        for(int i = 0; i < listaPaciente.size(); i++) {
+            comboBoxPaciente.addItem(listaPaciente.get(i).getNome());
         } 
     }
     

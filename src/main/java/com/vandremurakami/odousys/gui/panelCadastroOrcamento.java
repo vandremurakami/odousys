@@ -7,9 +7,6 @@ package com.vandremurakami.odousys.gui;
 
 import com.vandremurakami.odousys.controle.ControleCadastroOrcamento;
 import com.vandremurakami.odousys.modelo.Orcamento;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JTable;
@@ -41,12 +38,12 @@ public class panelCadastroOrcamento extends javax.swing.JPanel {
         return comboBoxDentista.getSelectedIndex()-1;
     }
     
-    public void setPaciente(String paciente) {
-        textFieldPaciente.setText(paciente);
+    public void setNomePaciente(String nome) {
+        comboBoxPaciente.setSelectedItem(nome);
     }
     
-    public String getPaciente() {
-        return textFieldPaciente.getText().trim();
+    public int getPosicaoPaciente() {
+        return comboBoxPaciente.getSelectedIndex()-1;
     }
     
     public void setNomeStatus(String nome) {
@@ -97,6 +94,10 @@ public class panelCadastroOrcamento extends javax.swing.JPanel {
         return comboBoxDentista;
     }
     
+    public JComboBox getComboBoxPaciente() {
+        return comboBoxPaciente;
+    }
+    
     public JComboBox getComboBoxStatus() {
         return comboBoxStatus;
     }
@@ -110,7 +111,7 @@ public class panelCadastroOrcamento extends javax.swing.JPanel {
         labelAbrir.setVisible(false);
         labelRemover.setVisible(false);
         tableServicos.setEnabled(false);
-        textFieldPaciente.setEnabled(false);
+        comboBoxPaciente.setEnabled(false);
         textFieldPorcentagemDesconto.setEnabled(false);
         textFieldValorDesconto.setEnabled(false);
         textPaneObservacao.setEnabled(false);
@@ -122,7 +123,7 @@ public class panelCadastroOrcamento extends javax.swing.JPanel {
         labelAbrir.setVisible(true);
         labelRemover.setVisible(true);
         tableServicos.setEnabled(true);
-        textFieldPaciente.setEnabled(true);
+        comboBoxPaciente.setEnabled(true);
         textFieldPorcentagemDesconto.setEnabled(true);
         textFieldValorDesconto.setEnabled(true);
         textPaneObservacao.setEnabled(true);
@@ -153,7 +154,6 @@ public class panelCadastroOrcamento extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         comboBoxStatus = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
-        textFieldPaciente = new javax.swing.JTextField();
         scrollPaneObservacao = new javax.swing.JScrollPane();
         textPaneObservacao = new javax.swing.JTextPane();
         labelAdicionar = new javax.swing.JLabel();
@@ -161,6 +161,7 @@ public class panelCadastroOrcamento extends javax.swing.JPanel {
         labelRemover = new javax.swing.JLabel();
         labelImprimirOrcamento = new javax.swing.JLabel();
         labelTabelaPreco = new javax.swing.JLabel();
+        comboBoxPaciente = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(254, 254, 254));
         setMaximumSize(new java.awt.Dimension(1060, 660));
@@ -288,7 +289,6 @@ public class panelCadastroOrcamento extends javax.swing.JPanel {
 
         jLabel4.setText("Paciente:");
         add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(155, 95, -1, -1));
-        add(textFieldPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, 250, 25));
 
         scrollPaneObservacao.setBorder(null);
 
@@ -351,6 +351,11 @@ public class panelCadastroOrcamento extends javax.swing.JPanel {
 
         labelTabelaPreco.setText("Tabela de Preco");
         add(labelTabelaPreco, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 140, -1, -1));
+
+        comboBoxPaciente.setEditable(true);
+        comboBoxPaciente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Selecione uma das opções>" }));
+        AutoCompleteDecorator.decorate(comboBoxDentista);
+        add(comboBoxPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, 250, 25));
     }// </editor-fold>//GEN-END:initComponents
 
     private void labelSalvarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelSalvarMouseClicked
@@ -408,6 +413,7 @@ public class panelCadastroOrcamento extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> comboBoxDentista;
+    private javax.swing.JComboBox<String> comboBoxPaciente;
     private javax.swing.JComboBox<String> comboBoxStatus;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -425,7 +431,6 @@ public class panelCadastroOrcamento extends javax.swing.JPanel {
     private javax.swing.JScrollPane scrollPaneObservacao;
     private javax.swing.JScrollPane scrollPaneServico;
     private javax.swing.JTable tableServicos;
-    private javax.swing.JTextField textFieldPaciente;
     private javax.swing.JTextField textFieldPorcentagemDesconto;
     private javax.swing.JTextField textFieldValorDesconto;
     private javax.swing.JTextField textFieldValorFinal;
