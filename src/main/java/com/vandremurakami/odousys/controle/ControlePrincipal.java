@@ -19,6 +19,7 @@ import com.vandremurakami.odousys.gui.panelListarPagamento;
 import com.vandremurakami.odousys.gui.panelHome;
 import com.vandremurakami.odousys.gui.panelListarTabelaPreco;
 import com.vandremurakami.odousys.gui.panelListarUsuario;
+import com.vandremurakami.odousys.modelo.Usuario;
 import com.vandremurakami.util.BackupBD;
 import javax.swing.JOptionPane;
 
@@ -29,6 +30,8 @@ import javax.swing.JOptionPane;
 public class ControlePrincipal {
     
     public static framePrincipal framePrincipal;
+    
+    private static Usuario usuarioLogado;
     
     public ControlePrincipal(framePrincipal frame) {
         ControlePrincipal.framePrincipal = frame;
@@ -75,6 +78,10 @@ public class ControlePrincipal {
         framePrincipal.setPanelBody(new panelFaturamentoMensal(), "Faturamento Mensal");
     }
     
+    public static Usuario getUsuarioLogado() {
+        return usuarioLogado;
+    }
+    
     public void conectaBD() {
         dialogConexaoBD dialogConexao = new dialogConexaoBD(framePrincipal, true);
         if(!dialogConexao.conectado()) {
@@ -90,6 +97,7 @@ public class ControlePrincipal {
         if(!login.validado()) {
             shutdown();
         }
+        usuarioLogado = login.getUsuario();
         login.dispose();
     }
     

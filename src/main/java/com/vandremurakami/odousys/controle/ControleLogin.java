@@ -17,12 +17,18 @@ public class ControleLogin {
     
     final private UsuarioDAO usuarioDAO = new UsuarioDAO();
     
+    private Usuario usuario;
+    
     public ControleLogin() {
     
     }
     
+    public Usuario getUsuario() {
+        return usuario;
+    }
+    
     public boolean validaUsuarioSenha(String login, String senha) {
-        Usuario usuario = usuarioDAO.BuscaUsuario(login);
+        usuario = usuarioDAO.BuscaUsuario(login);
         
         if (usuario == null)
             return false;

@@ -6,7 +6,6 @@
 package com.vandremurakami.odousys.gui;
 
 import com.vandremurakami.odousys.controle.ControleCadastroUsuario;
-import com.vandremurakami.odousys.controle.ControleListaUsuario;
 import com.vandremurakami.odousys.modelo.Usuario;
 import java.awt.event.KeyEvent;
 import javax.swing.JComboBox;

@@ -7,6 +7,7 @@ package com.vandremurakami.odousys.gui;
 
 import java.awt.event.KeyEvent;
 import com.vandremurakami.odousys.controle.ControleLogin;
+import com.vandremurakami.odousys.modelo.Usuario;
 import javax.swing.JOptionPane;
 
 
@@ -28,6 +29,10 @@ public class dialogLogin extends javax.swing.JDialog {
     public dialogLogin(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+    }
+    
+    public Usuario getUsuario() {
+        return controleLogin.getUsuario();
     }
     
     public boolean validado() {

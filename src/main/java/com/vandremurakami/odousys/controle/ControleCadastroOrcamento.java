@@ -92,6 +92,8 @@ public class ControleCadastroOrcamento {
                 cadastroOrcamento.setNaoEditavel();
         }
         else {
+            if(ControlePrincipal.getUsuarioLogado().getDentista() != null)
+                cadastroOrcamento.setNomeDentista(ControlePrincipal.getUsuarioLogado().getDentista().getNome());
             cadastroOrcamento.setNomeStatus(statusDAO.BuscarStatusAberto().getNome());
         }
     }
