@@ -5,10 +5,9 @@
  */
 package com.vandremurakami.odousys.gui;
 
-import com.vandremurakami.odousys.controle.ControleUsuario;
+import com.vandremurakami.odousys.controle.ControleListaUsuario;
 import java.awt.event.KeyEvent;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 
 /**
  *
@@ -16,23 +15,22 @@ import javax.swing.JTextField;
  */
 public class panelListarUsuario extends javax.swing.JPanel {
     
-    final private ControleUsuario controleUsuario = new ControleUsuario(this);
+    final private ControleListaUsuario controleListaUsuario;
     
     /**
      * Creates new form panelUsuario
-     * @param jFrame
      */
     public panelListarUsuario() {
         initComponents();
-        controleUsuario.PreencheTabelaUsuario();
+        controleListaUsuario = new ControleListaUsuario(this);
     }
 
     public JTable getTabelaUsuarios() {
         return tableUsuarios; 
     }
     
-    public JTextField getFiltro() {
-        return textFieldFiltro;
+    public String getFiltro() {
+        return textFieldFiltro.getText().trim();
     }
     
     /**
@@ -70,12 +68,19 @@ public class panelListarUsuario extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Nome", "Login"
+                "Login", "Dentista"
             }
         ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class
+            };
             boolean[] canEdit = new boolean [] {
                 false, false
             };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -90,7 +95,7 @@ public class panelListarUsuario extends javax.swing.JPanel {
 
         add(scrollPaneTabelaUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 100, 710, 410));
 
-        labelFiltro1.setText("Filtrar por nome:");
+        labelFiltro1.setText("Filtrar por login:");
         add(labelFiltro1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 40, -1, -1));
 
         textFieldFiltro.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -168,42 +173,42 @@ public class panelListarUsuario extends javax.swing.JPanel {
 
     private void tableUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableUsuariosMouseClicked
         if (evt.getClickCount() == 2) {
-            controleUsuario.CadastroAbrirUsuario();
+            controleListaUsuario.CadastroAbrirUsuario();
         }
     }//GEN-LAST:event_tableUsuariosMouseClicked
 
     private void textFieldFiltroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textFieldFiltroKeyPressed
         int key = evt.getKeyCode();
         if (key == KeyEvent.VK_ENTER) {
-            if(controleUsuario != null)
-            controleUsuario.PreencheTabelaUsuario();
+            if(controleListaUsuario != null)
+            controleListaUsuario.PreencheTabelaUsuario();
         }
     }//GEN-LAST:event_textFieldFiltroKeyPressed
 
     private void labelLimparFiltroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelLimparFiltroMouseClicked
         textFieldFiltro.setText("");
-        if(controleUsuario != null)
-            controleUsuario.PreencheTabelaUsuario();
+        if(controleListaUsuario != null)
+            controleListaUsuario.PreencheTabelaUsuario();
     }//GEN-LAST:event_labelLimparFiltroMouseClicked
 
     private void labelAdicionar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelAdicionar1MouseClicked
-        if(controleUsuario != null)
-            controleUsuario.CadastroAdicionarUsuario();
+        if(controleListaUsuario != null)
+            controleListaUsuario.CadastroAdicionarUsuario();
     }//GEN-LAST:event_labelAdicionar1MouseClicked
 
     private void labelAbrir1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelAbrir1MouseClicked
-        if(controleUsuario != null)
-            controleUsuario.CadastroAbrirUsuario();
+        if(controleListaUsuario != null)
+            controleListaUsuario.CadastroAbrirUsuario();
     }//GEN-LAST:event_labelAbrir1MouseClicked
 
     private void labelRemover1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelRemover1MouseClicked
-        if(controleUsuario != null)
-            controleUsuario.RemoveUsuario();
+        if(controleListaUsuario != null)
+            controleListaUsuario.RemoveUsuario();
     }//GEN-LAST:event_labelRemover1MouseClicked
 
     private void labelFecharMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelFecharMouseClicked
-        if(controleUsuario != null)
-            controleUsuario.FecharListaUsuario();
+        if(controleListaUsuario != null)
+            controleListaUsuario.FecharListaDentista();
     }//GEN-LAST:event_labelFecharMouseClicked
 
 

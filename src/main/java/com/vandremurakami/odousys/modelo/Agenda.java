@@ -38,6 +38,11 @@ public class Agenda implements java.io.Serializable {
     @JoinColumn(name = "cod_dentista", nullable = false)    
     private Dentista dentista;
     
+    @Id
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "cod_paciente", nullable = false)    
+    private Paciente paciente;
+    
     @Column(name = "anotacao")
     private String anotacao;
 
@@ -76,6 +81,14 @@ public class Agenda implements java.io.Serializable {
 
     public void setDentista(Dentista dentista) {
         this.dentista = dentista;
+    }
+    
+    public Paciente getPaciente() {
+        return this.paciente;
+    }
+
+    public void setPaciente(Paciente pac) {
+        this.paciente = pac;
     }
 
     public void setAnotacao(String anotacao) {

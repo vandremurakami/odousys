@@ -1,13 +1,3 @@
-create table usuario (
-    codigo serial not null,
-    nome varchar(80) not null unique,
-    login varchar(40) not null unique,
-    senha varchar(255) not null,
-    primary key(codigo)
-);
-alter table usuario owner to odousys;
-
-
 CREATE TABLE dentista (
     codigo serial NOT NULL,
     nome varchar(60) NOT NULL,
@@ -40,6 +30,15 @@ CREATE TABLE paciente (
 );
 ALTER TABLE paciente OWNER TO odousys;
 
+create table usuario (
+    codigo serial not null,
+    cod_dentista int,
+    login varchar(40) not null unique,
+    senha varchar(255) not null,
+    primary key(codigo),
+    foreign key(cod_dentista) references dentista(codigo)
+);
+alter table usuario owner to odousys;
 
 CREATE TABLE horarios_agenda (
     hora time without time zone NOT NULL,
@@ -151,7 +150,7 @@ ALTER TABLE pagamento OWNER TO odousys;
 
 -- Inserts --
 
-insert into usuario(nome, login, senha) values ('Administrador', 'admin', '$2a$10$JUl9f9PEtMxmn9n4QBCwfuOaa2hAwdY8Kjr3sDvRoPrm98R/lTnkm');
+insert into usuario(login, senha) values ('admin', '$2a$10$JUl9f9PEtMxmn9n4QBCwfuOaa2hAwdY8Kjr3sDvRoPrm98R/lTnkm');
 
 insert into tabela_preco(nome, ativo) values ('Tabela 2020', true);
 

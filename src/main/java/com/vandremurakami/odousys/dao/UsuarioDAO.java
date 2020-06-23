@@ -29,7 +29,7 @@ public class UsuarioDAO {
 
         session = sessionFactory.openSession();
 
-        Query query = session.createQuery("from Usuario order by nome", Usuario.class);
+        Query query = session.createQuery("from Usuario order by login", Usuario.class);
         listaUsuarios.addAll(query.getResultList());
         session.close();
 

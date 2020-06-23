@@ -5,8 +5,13 @@
  */
 package com.vandremurakami.odousys.gui;
 
-import com.vandremurakami.odousys.controle.ControleUsuario;
+import com.vandremurakami.odousys.controle.ControleCadastroUsuario;
+import com.vandremurakami.odousys.controle.ControleListaUsuario;
+import com.vandremurakami.odousys.modelo.Usuario;
 import java.awt.event.KeyEvent;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 /**
  *
@@ -14,29 +19,34 @@ import java.awt.event.KeyEvent;
  */
 public class panelCadastroUsuario extends javax.swing.JPanel {
 
-    final private ControleUsuario controleUsuario;
+    final private ControleCadastroUsuario controleCadastroUsuario;
 
     private String senhaOriginal = "";
     
     /**
      * Creates new form panelUsuario
-     * @param controle
+     * @param dialog
+     * @param usuario
      */
-    public panelCadastroUsuario(ControleUsuario controle) {
-        this.controleUsuario = controle;
+    public panelCadastroUsuario(JDialog dialog, Usuario usuario) {
         initComponents();
+        controleCadastroUsuario = new ControleCadastroUsuario(dialog, this, usuario);
     }
     
-    public String getNome() {
-        return textFieldNome.getText();
+    public void setNomeDentista(String nome) {
+        comboBoxDentista.setSelectedItem(nome);
     }
     
-    public void setNome(String nome) {
-        textFieldNome.setText(nome);
+    public int getPosicaoDentista() {
+        return comboBoxDentista.getSelectedIndex()-1;
+    }
+    
+    public JComboBox getComboBoxDentista() {
+        return comboBoxDentista;
     }
     
     public String getLogin() {
-        return textFieldLogin.getText();
+        return textFieldLogin.getText().trim();
     }
 
     public void setLogin(String login) {
@@ -65,14 +75,14 @@ public class panelCadastroUsuario extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        labelNome = new javax.swing.JLabel();
+        labelDentista = new javax.swing.JLabel();
         labelLogin = new javax.swing.JLabel();
         labelSenha = new javax.swing.JLabel();
         labelSalvar = new javax.swing.JLabel();
         labelFechar = new javax.swing.JLabel();
-        textFieldNome = new javax.swing.JTextField();
         textFieldLogin = new javax.swing.JTextField();
         passwordField = new javax.swing.JPasswordField();
+        comboBoxDentista = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(254, 254, 254));
         setMaximumSize(new java.awt.Dimension(1024, 600));
@@ -80,11 +90,11 @@ public class panelCadastroUsuario extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(1024, 600));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        labelNome.setText("Nome:");
-        add(labelNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 190, -1, -1));
+        labelDentista.setText("Dentista:");
+        add(labelDentista, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 240, -1, -1));
 
         labelLogin.setText("Login:");
-        add(labelLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 240, -1, -1));
+        add(labelLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 190, -1, -1));
 
         labelSenha.setText("Senha:");
         add(labelSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 290, -1, -1));
@@ -115,36 +125,27 @@ public class panelCadastroUsuario extends javax.swing.JPanel {
         });
         add(labelFechar, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 350, -1, -1));
 
-        textFieldNome.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                textFieldNomeKeyPressed(evt);
-            }
-        });
-        add(textFieldNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 185, 330, 25));
-
         textFieldLogin.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 textFieldLoginKeyPressed(evt);
             }
         });
-        add(textFieldLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 235, 330, 25));
+        add(textFieldLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 185, 330, 25));
         add(passwordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 285, 330, 25));
+
+        comboBoxDentista.setEditable(true);
+        comboBoxDentista.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Selecione uma das opções>" }));
+        AutoCompleteDecorator.decorate(comboBoxDentista);
+        add(comboBoxDentista, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 235, 250, 25));
     }// </editor-fold>//GEN-END:initComponents
 
     private void labelSalvarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelSalvarMouseClicked
-        controleUsuario.AdicionaAtualizaUsuario(this);
+        controleCadastroUsuario.AdicionaAtualizaUsuario();
     }//GEN-LAST:event_labelSalvarMouseClicked
 
     private void labelFecharMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelFecharMouseClicked
-        controleUsuario.FecharCadastroUsuario();
+        controleCadastroUsuario.Fechar();
     }//GEN-LAST:event_labelFecharMouseClicked
-
-    private void textFieldNomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textFieldNomeKeyPressed
-        int key = evt.getKeyCode();
-        if (key == KeyEvent.VK_ENTER) {
-            textFieldLogin.requestFocus();
-        }
-    }//GEN-LAST:event_textFieldNomeKeyPressed
 
     private void textFieldLoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textFieldLoginKeyPressed
         int key = evt.getKeyCode();
@@ -155,13 +156,13 @@ public class panelCadastroUsuario extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> comboBoxDentista;
+    private javax.swing.JLabel labelDentista;
     private javax.swing.JLabel labelFechar;
     private javax.swing.JLabel labelLogin;
-    private javax.swing.JLabel labelNome;
     private javax.swing.JLabel labelSalvar;
     private javax.swing.JLabel labelSenha;
     private javax.swing.JPasswordField passwordField;
     private javax.swing.JTextField textFieldLogin;
-    private javax.swing.JTextField textFieldNome;
     // End of variables declaration//GEN-END:variables
 }
