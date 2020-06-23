@@ -32,7 +32,7 @@ public class framePrincipal extends javax.swing.JFrame {
         panelMenuCadastro.setVisible(false);
         labelMenuFaturamentoMensal.setVisible(false);
         
-        controlePrincipal.mostraHome();
+        ControlePrincipal.mostraHome();
     }
     
     public void setPanelBody(JPanel panel, String titulo) {

@@ -18,6 +18,7 @@ import com.vandremurakami.odousys.gui.panelListarOrcamento;
 import com.vandremurakami.odousys.gui.panelListarPagamento;
 import com.vandremurakami.odousys.gui.panelHome;
 import com.vandremurakami.odousys.gui.panelListarTabelaPreco;
+import com.vandremurakami.odousys.gui.panelListarUsuario;
 import com.vandremurakami.util.BackupBD;
 import javax.swing.JOptionPane;
 
@@ -47,7 +48,7 @@ public class ControlePrincipal {
     }
     
     public void mostraUsuario() {
-//        framePrincipal.setPanelBody(new panelListarUsuario(), "Usuários");
+        framePrincipal.setPanelBody(new panelListarUsuario(), "Usuários");
     }
     
     public void mostraPreco() {
