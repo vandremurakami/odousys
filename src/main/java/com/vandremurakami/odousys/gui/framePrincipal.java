@@ -67,7 +67,7 @@ public class framePrincipal extends javax.swing.JFrame {
         bodyScrollPanel = new javax.swing.JScrollPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Protolab");
+        setTitle("Odousys");
         setMaximumSize(new java.awt.Dimension(1280, 760));
         setMinimumSize(new java.awt.Dimension(1280, 760));
         setPreferredSize(new java.awt.Dimension(1280, 760));
