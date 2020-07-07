@@ -115,6 +115,8 @@
                 <configuration>
                     <archive>
                         <manifest>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                            <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>libs/</classpathPrefix>
                             <mainClass>
